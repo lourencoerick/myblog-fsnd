@@ -1,0 +1,31 @@
+{
+    "name": "Yotube Notes Taker: DEV",
+    "dockerFile": "../Dockerfile",
+    "mounts": [
+	    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
+    "context": "..",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // "python.pythonPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true
+  
+            },
+            "extensions": [
+                "ms-vscode-remote.vscode-remote-extensionpack",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "eamodio.gitlens",
+                "ms-python.pylint"
+            ]
+            
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "",
+	"features": {
+		"git": "latest"
+	}
+}
