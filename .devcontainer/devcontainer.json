@@ -8,7 +8,15 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "pylint.enabled": true
+                "pylint.enabled": true,
+                
+                "bitoAI.codeCompletion.enableCommentToCode": true,
+                "bitoAI.codeCompletion.enableAutoCompletion": true,
+
+                "conventionalCommits.scopes": [
+                    "dev-env",
+                    "backend"
+                ]
   
             },
             "extensions": [
@@ -17,7 +25,12 @@
                 "ms-python.python",
                 "eamodio.gitlens",
                 "ms-python.pylint",
-                "vivaxy.vscode-conventional-commits"
+                "vivaxy.vscode-conventional-commits",
+                "Vue.volar",
+                "Bito.Bito",
+                "dbaeumer.vscode-eslint",
+                "Tobermory.es6-string-html",
+                "Postman.postman-for-vscode"
             ]
             
         }
@@ -28,3 +41,4 @@
 		"git": "latest"
 	}
 }
+
