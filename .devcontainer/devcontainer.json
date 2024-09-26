@@ -27,16 +27,18 @@
                 "ms-python.pylint",
                 "vivaxy.vscode-conventional-commits",
                 "Vue.volar",
-                "Bito.Bito",
+                // "Bito.Bito",
                 "dbaeumer.vscode-eslint",
                 "Tobermory.es6-string-html",
-                "Postman.postman-for-vscode"
+                "Postman.postman-for-vscode",
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss"
             ]
             
         }
     },
     "remoteUser": "vscode",
-    "postCreateCommand": "",
+    "postCreateCommand": "cd frontend && npm install && npm install -D tailwindcss ",
 	"features": {
 		"git": "latest"
 	}
