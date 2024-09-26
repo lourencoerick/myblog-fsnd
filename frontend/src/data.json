@@ -1,0 +1,171 @@
+{
+  "articles": [
+    {
+      "id": "3",
+      "title": "Eight teach throw type.",
+      "content": "Since start interview successful anything important. Goal opportunity read whole visit day.",
+      "author": "Samuel Thompson",
+      "tag": [
+        "art",
+        "science"
+      ],
+      "created_at": "2024-07-29T04:11:30",
+      "updated_at": "2024-09-04T16:29:55"
+    },
+    {
+      "id": "4",
+      "title": "Push particular official despite action choice.",
+      "content": "Among report person success event. Likely base serve. West song apply interest spring senior.",
+      "author": "Lisa Gonzalez",
+      "tag": [
+        "health"
+      ],
+      "created_at": "2024-03-02T09:18:17",
+      "updated_at": "2024-04-25T11:35:00"
+    },
+    {
+      "id": "5",
+      "title": "Maintain seat improve author add fact.",
+      "content": "Suddenly new service majority challenge human. Present treatment skill compare relationship speech.",
+      "author": "Christopher Carter",
+      "tag": [
+        "sports",
+        "news"
+      ],
+      "created_at": "2024-08-09T07:39:30",
+      "updated_at": "2024-08-10T22:44:30"
+    },
+    {
+      "id": "7",
+      "title": "Seem nothing live level raise huge exist action.",
+      "content": "Year movement someone store decision quickly responsibility claim. Pick friend know avoid stand manage.",
+      "author": "James Clark",
+      "tag": [
+        "science",
+        "art"
+      ],
+      "created_at": "2024-05-19T04:12:08",
+      "updated_at": "2024-08-20T15:25:45"
+    },
+    {
+      "id": "9",
+      "title": "Word seat language season method support.",
+      "content": "Down when live message. Consider lawyer public wish late. Clear star choose like.",
+      "author": "Emily Davis",
+      "tag": [
+        "tech",
+        "sports"
+      ],
+      "created_at": "2024-02-11T03:25:40",
+      "updated_at": "2024-03-12T15:00:20"
+    },
+    {
+      "id": "10",
+      "title": "Kind way perform force.",
+      "content": "Than because hear war interview. Style cost admit. Officer third deal affect.",
+      "author": "Jack Gutierrez",
+      "tag": [
+        "sports"
+      ],
+      "created_at": "2024-04-03T08:06:52",
+      "updated_at": "2024-05-21T21:53:00"
+    }
+  ],
+  "collections": [
+    {
+      "id": "1",
+      "title": "Prove poor view.",
+      "description": "Family whether would short together. Note area likely second. Development note size population already his.",
+      "created_at": "2024-09-11T08:32:34",
+      "updated_at": "2024-10-11T20:50:19",
+      "articles": [
+        "1",
+        "4"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Sound church huge.",
+      "description": "Off season billion. Stop act use south inside. Program she ability even despite position mean our.",
+      "created_at": "2024-06-05T16:28:04",
+      "updated_at": "2024-07-17T14:14:10",
+      "articles": [
+        "5"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Do training morning hotel.",
+      "description": "Blood summer believe main bit water much huge. Its between record accept list. Woman camera before direction.",
+      "created_at": "2024-05-26T02:08:32",
+      "updated_at": "2024-06-13T04:46:31",
+      "articles": []
+    },
+    {
+      "id": "5",
+      "title": "Catch over physical forward.",
+      "description": "Catch too measure news sea. Over what leg artist the offer. Professor take enter detail to nation radio. Skin analysis behavior effort mother kid rock.",
+      "created_at": "2024-03-03T10:41:40",
+      "updated_at": "2024-05-20T21:35:14",
+      "articles": []
+    },
+    {
+      "id": "2d78",
+      "title": "Voluptatem consequat",
+      "description": "Et in proident in o",
+      "articles": []
+    },
+    {
+      "id": "88ed",
+      "title": "Recusandae Doloribu",
+      "description": "Maiores eius minima",
+      "articles": []
+    },
+    {
+      "id": "0adc",
+      "title": "Possimus quo conseq",
+      "description": "Vero harum voluptas",
+      "articles": [
+        "10"
+      ]
+    },
+    {
+      "id": "3659",
+      "title": "Doloremque mollitia ",
+      "description": "Elit culpa ut fugi",
+      "articles": [
+        "10",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "id": "45f7",
+      "title": "Animi voluptas quia",
+      "description": "Reiciendis lorem fug",
+      "articles": [
+        "7",
+        "3",
+        "4",
+        "9"
+      ]
+    },
+    {
+      "id": "0197",
+      "title": "Animi voluptas quia",
+      "description": "Reiciendis lorem fug",
+      "articles": [
+        "7",
+        "4"
+      ]
+    },
+    {
+      "id": "1573",
+      "title": "Do training morning hotel.",
+      "description": "Blood summer believe main bit water much huge. Its between record accept list. Woman camera before direction.",
+      "articles": [
+        "3"
+      ]
+    }
+  ]
+}
