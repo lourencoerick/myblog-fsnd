@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps } from 'vue';
-import pills from '@/assets/pill-teste.jpg';
 
 defineProps({
   title: {
