@@ -12,7 +12,9 @@
     "server": "json-server --watch src/data.json --port 5000"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.3.3",
     "axios": "^1.7.7",
+    "pinia": "^2.2.2",
     "primeicons": "^7.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
