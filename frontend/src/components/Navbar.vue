@@ -2,10 +2,16 @@
 import { RouterLink, useRoute } from 'vue-router';
 import logo from '@/assets/mylogo.png';
 
+import { useAuth0 } from '@auth0/auth0-vue';
+import LoginButton from './buttons/LoginButton.vue';
+import LogoutButton from './buttons/LogoutButton.vue';
+
 const route = useRoute();
 const isActive = (path) => {
   return route.path === path;
 };
+
+const { isAuthenticated } = useAuth0();
 </script>
 
 <template>
@@ -86,6 +92,21 @@ const isActive = (path) => {
                 class="absolute inset-0 border-2 border-red-600 rounded-lg pointer-events-none"></span>
             </RouterLink>
           </li>
+
+          <li v-if="!isAuthenticated"> 
+            <LoginButton />
+          </li>
+
+          <li v-else>
+            <LogoutButton />
+          </li>
+
+          <li>
+            <RouterLink to="/profile" >
+              Profile
+            </RouterLink>
+          </li>
+
         </ul>
       </nav>
     </div>
