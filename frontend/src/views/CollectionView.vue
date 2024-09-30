@@ -7,9 +7,11 @@ import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
 import ArticleListings from  '@/components/ArticleListings.vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 const route = useRoute();
 const toast = useToast();
+const { isAuthenticated } = useAuth0();
 
 const collectionId = route.params.id;
 
@@ -52,7 +54,12 @@ onMounted(async () => {
     <section v-if="!state.isLoading" class="bg-white">
         <BackButton text="Back to Collection Listings" to="/collections" />
         <div class="container m-auto py-10 px-6">
-            <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
+            <div class="grid grid-cols-1 w-full gap-6"
+                :class="[
+                isAuthenticated
+                  ? 'md:grid-cols-70/30' 
+                  : ''
+              ]">
                 <main>
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h2 class="text-gray-800 text-3xl font-bold mb-6">
@@ -67,7 +74,7 @@ onMounted(async () => {
 
 
                 <!-- Sidebar -->
-                <aside>
+                <aside v-if="isAuthenticated" >
                     <!-- Manage -->
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-xl font-bold mb-6">Manage Collection</h3>
