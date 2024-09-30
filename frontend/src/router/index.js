@@ -9,6 +9,8 @@ import AddCollectionView from '@/views/AddCollectionView.vue'
 import EditCollectionView from '@/views/EditCollectionView.vue'
 import CollectionView from '@/views/CollectionView.vue'
 import CollectionsView from '@/views/CollectionsView.vue'
+import Profile from '@/views/Profile.vue'
+import { useAuth0 } from '@auth0/auth0-vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,12 +33,14 @@ const router = createRouter({
     {
       path: '/articles/edit/:id',
       name: 'edit-article',
-      component: EditArticleView
+      component: EditArticleView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/articles/add',
       name: 'add-article',
-      component: AddArticleView
+      component: AddArticleView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/collections',
@@ -51,19 +55,38 @@ const router = createRouter({
     {
       path: '/collections/add',
       name: 'add-collection',
-      component: AddCollectionView
+      component: AddCollectionView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/collections/edit/:id',
       name: 'edit-collection',
-      component: EditCollectionView
-    },    
+      component: EditCollectionView,
+      meta: { requiresAuth: true }
+    },   
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },        
     {
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: NotFoundView
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isAuthenticated.value) {
+      localStorage.setItem('redirectTo', to.fullPath);
+      loginWithRedirect();
+    }
+  }
+  next(); 
+});
 
 export default router
