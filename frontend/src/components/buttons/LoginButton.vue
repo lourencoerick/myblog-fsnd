@@ -1,11 +1,9 @@
 <script setup>
-import { useAuthStore } from '@/stores/auth';
-
-const authStore = useAuthStore(); 
-// authStore.initAuth();
+import { useAuth0 } from '@auth0/auth0-vue';
+const { loginWithRedirect } = useAuth0(); 
 
 const login = async () => {
-    await authStore.login();
+    loginWithRedirect();
 };
 
 </script>
