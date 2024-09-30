@@ -6,6 +6,7 @@ import { useToast } from 'vue-toastification';
 import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
 import ArticleListings from  '@/components/ArticleListings.vue';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 const route = useRoute();
 const toast = useToast();
