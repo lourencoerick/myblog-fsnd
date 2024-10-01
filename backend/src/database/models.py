@@ -63,8 +63,22 @@ class Article(db.Model):
 
     # Many-to-Many relationship with Collection
     collections = db.relationship(
-        "Collection", secondary=articles_collections, back_populates="articles"
+        "Collection",
+        secondary=articles_collections,
+        back_populates="articles",
+        passive_deletes=True,
     )
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
         return f"<Article {self.id} : {self.title}>"
@@ -85,8 +99,22 @@ class Collection(db.Model):
 
     # Many-to-Many relationship with Article
     articles = db.relationship(
-        "Article", secondary=articles_collections, back_populates="collections"
+        "Article",
+        secondary=articles_collections,
+        back_populates="collections",
+        passive_deletes=True,
     )
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
         return f"<Collection {self.id} : {self.title}>"
