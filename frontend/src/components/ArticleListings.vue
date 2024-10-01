@@ -36,7 +36,7 @@ onMounted(async () => {
     if (props.collectionID === undefined) {
         try {
             const response = await axios.get('/api/articles');
-            state.articles = response.data;
+            state.articles = response.data.articles;
         } catch (error) {
             console.error('Error fetching articles', error);
         } finally {
@@ -45,10 +45,10 @@ onMounted(async () => {
     } else {
         try {
             const response = await axios.get(`/api/collections/${props.collectionID}`);
-            const articlesID = response.data.articles;
-            state.articles = await Promise.all(articlesID.map(async (articleID) => {
+            const articleIDs = response.data.collection.article_ids;
+            state.articles = await Promise.all(articleIDs.map(async (articleID) => {
                 const response = await axios.get(`/api/articles/${articleID}`);
-                return response.data
+                return response.data.article
             }
             ));
 
