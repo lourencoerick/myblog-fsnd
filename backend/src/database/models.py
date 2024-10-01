@@ -34,7 +34,8 @@ def setup_db(app, db_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
 
 articles_collections = db.Table(
