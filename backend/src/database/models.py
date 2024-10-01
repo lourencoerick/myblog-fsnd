@@ -66,7 +66,6 @@ class Article(db.Model):
         "Collection",
         secondary=articles_collections,
         back_populates="articles",
-        passive_deletes=True,
     )
 
     def insert(self):
@@ -79,6 +78,14 @@ class Article(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def response(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "content": self.content,
+            "author": self.author,
+        }
 
     def __repr__(self):
         return f"<Article {self.id} : {self.title}>"
@@ -102,7 +109,6 @@ class Collection(db.Model):
         "Article",
         secondary=articles_collections,
         back_populates="collections",
-        passive_deletes=True,
     )
 
     def insert(self):
@@ -115,6 +121,14 @@ class Collection(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def response(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "article_ids": [article.id for article in self.articles],
+        }
 
     def __repr__(self):
         return f"<Collection {self.id} : {self.title}>"
