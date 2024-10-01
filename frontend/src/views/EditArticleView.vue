@@ -29,7 +29,7 @@ const handleSubmit = async () => {
 
 
     try {
-        const response = await axios.patch(`/api/articles/edit/${articleId}`, updatedArticle,
+        const response = await axios.patch(`/api/articles/${articleId}`, updatedArticle,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`

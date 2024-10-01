@@ -24,7 +24,7 @@ const handleSubmit = async () => {
     const token = await getAccessTokenSilently();
 
     try {
-        const response = await axios.post('/api/articles/add', newArticle, {
+        const response = await axios.post('/api/articles/', newArticle, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

@@ -68,7 +68,7 @@ const addCollection = async () => {
         article_ids: form.selectedArticles
     };
     try {
-        const response = await axios.post('/api/collections/edit', newCollection,
+        const response = await axios.patch('/api/collections/', newCollection,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
