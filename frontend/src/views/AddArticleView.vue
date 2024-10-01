@@ -3,6 +3,9 @@ import { reactive } from 'vue';
 import axios from 'axios';
 import router from '@/router';
 import { useToast } from 'vue-toastification';
+import { useAuth0 } from '@auth0/auth0-vue';
+
+const { getAccessTokenSilently } = useAuth0();
 const form = reactive({
     title: '',
     content: '',
@@ -18,8 +21,14 @@ const handleSubmit = async () => {
         author: form.author
     }
 
+    const token = await getAccessTokenSilently();
+
     try {
-        const response = await axios.post('/api/articles', newArticle);
+        const response = await axios.post('/api/articles/add', newArticle, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         toast.success('Article added sucessfully');
         router.push(`/articles/${response.data.id}`);
     } catch (error) {

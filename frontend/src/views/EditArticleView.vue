@@ -4,6 +4,9 @@ import axios from 'axios';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
+import { useAuth0 } from '@auth0/auth0-vue';
+
+const { getAccessTokenSilently } = useAuth0();
 const form = reactive({
     title: '',
     content: '',
@@ -15,15 +18,24 @@ const route = useRoute();
 const articleId = route.params.id
 const toast = useToast();
 const handleSubmit = async () => {
+    const token = await getAccessTokenSilently();
 
     const updatedArticle = {
+        id: articleId,
         title: form.title,
         content: form.content,
         author: form.author
     }
 
+
     try {
-        const response = await axios.put(`/api/articles/${articleId}`, updatedArticle);
+        const response = await axios.patch(`/api/articles/edit/${articleId}`, updatedArticle,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
         toast.success('Article updated sucessfully');
         router.push(`/articles/${response.data.id}`);
     } catch (error) {
@@ -40,7 +52,7 @@ const state = reactive({
 onMounted(async () => {
     try {
         const response = await axios.get(`/api/articles/${articleId}`)
-        state.article = response.data;
+        state.article = response.data.article;
         // populate inputs
         form.title = state.article.title;
         form.content = state.article.content;
@@ -52,7 +64,7 @@ onMounted(async () => {
     } finally {
         state.isLoading = false;
     }
-    
+
 });
 </script>
 
@@ -90,7 +102,7 @@ onMounted(async () => {
                         <button
                             class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                             type="submit">
-                            Update Job
+                            Update Article
                         </button>
                     </div>
                 </form>

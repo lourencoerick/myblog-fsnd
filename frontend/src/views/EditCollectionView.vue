@@ -4,7 +4,9 @@ import { ref, reactive, onMounted } from 'vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
+import { useAuth0 } from '@auth0/auth0-vue';
 
+const { getAccessTokenSilently } = useAuth0();
 const route = useRoute();
 const collectionId = route.params.id
 
@@ -22,7 +24,7 @@ const articles = ref([]);
 const getArticles = async () => {
     try {
         const response = await axios.get('/api/articles');
-        articles.value = response.data;
+        articles.value = response.data.articles;
     } catch (error) {
         console.error('Error fetching articles:', error);
     }
@@ -37,7 +39,7 @@ const state = reactive({
 const populateForm = async () => {
     try {
         const response = await axios.get(`/api/collections/${collectionId}`)
-        state.collection = response.data;
+        state.collection = response.data.collection;
         // populate inputs
         form.title = state.collection.title;
         form.description = state.collection.description;
@@ -49,7 +51,7 @@ const populateForm = async () => {
     } finally {
         state.isLoading = false;
     }
-    
+
 }
 onMounted(() => {
     getArticles();
@@ -58,13 +60,21 @@ onMounted(() => {
 
 
 const addCollection = async () => {
+    const token = await getAccessTokenSilently();
+
     const newCollection = {
         title: form.title,
         description: form.description,
-        articles: form.selectedArticles
+        article_ids: form.selectedArticles
     };
     try {
-        const response = await axios.post('/api/collections', newCollection);
+        const response = await axios.post('/api/collections/edit', newCollection,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
         toast.success('Collection added sucessfully');
         console.log(response);
         router.push(`/collections/${response.data.id}`);

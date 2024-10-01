@@ -11,7 +11,7 @@ import { useAuth0 } from '@auth0/auth0-vue';
 
 const route = useRoute();
 const toast = useToast();
-const { isAuthenticated } = useAuth0();
+const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 const collectionId = route.params.id;
 
@@ -23,9 +23,14 @@ const state = reactive({
 const deleteCollection = async () => {
     try {
         const confirm = window.confirm('Are you sure you want to delete this collection?');
-        // const confirm = true;
+        const token = await getAccessTokenSilently();
+
         if (confirm) {
-            await axios.delete(`/api/collections/${collectionId}`);
+            await axios.delete(`/api/collections/${collectionId}`,          {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             toast.success('Collection deleted');
             router.push('/collections');
         }
@@ -39,7 +44,7 @@ const deleteCollection = async () => {
 onMounted(async () => {
     try {
         const response = await axios.get(`/api/collections/${collectionId}`);
-        state.collection = response.data;
+        state.collection = response.data.collection;
     } catch (error) {
         console.error('Error fetching collection', error);
     } finally {

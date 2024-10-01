@@ -8,7 +8,7 @@ import BackButton from '@/components/BackButton.vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { useAuth0 } from '@auth0/auth0-vue';
 
-const { isAuthenticated } = useAuth0();
+const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 const route = useRoute();
 const toast = useToast();
 
@@ -22,9 +22,14 @@ const state = reactive({
 const deleteArticle = async () => {
     try {
         const confirm = window.confirm('Are you sure you want to delete this article?');
-        // const confirm = true;
+        const token = await getAccessTokenSilently();
+
         if (confirm) {
-            await axios.delete(`/api/articles/${articleId}`);
+            await axios.delete(`/api/articles/${articleId}`,          {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             toast.success('Article deleted');
             router.push('/articles');
         }
@@ -38,9 +43,12 @@ const deleteArticle = async () => {
 onMounted(async () => {
     try {
         const response = await axios.get(`/api/articles/${articleId}`);
-        state.article = response.data;
+        state.article = response.data.article;
     } catch (error) {
         console.error('Error fetching article', error);
+        if (error.status === 404) {
+            router.push("/not-found")
+        }
     } finally {
         state.isLoading = false;
     }

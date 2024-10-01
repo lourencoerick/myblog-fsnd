@@ -3,6 +3,9 @@ import axios from 'axios';
 import { ref, reactive, onMounted } from 'vue';
 import router from '@/router';
 import { useToast } from 'vue-toastification';
+import { useAuth0 } from '@auth0/auth0-vue';
+
+const { getAccessTokenSilently } = useAuth0();
 
 const toast = useToast();
 
@@ -34,7 +37,12 @@ const addCollection = async () => {
     };
 
     try {
-        const response = await axios.post('/api/collections', newCollection);
+        const token = await getAccessTokenSilently();
+        const response = await axios.post('/api/collections', newCollection, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         toast.success('Collection added sucessfully');
         console.log(response);
         router.push(`/collections/${response.data.id}`);
