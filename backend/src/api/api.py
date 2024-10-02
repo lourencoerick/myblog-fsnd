@@ -119,6 +119,9 @@ def create_app(test_config=None):
         content = body.get("content")
         author = body.get("author")
 
+        if not title or not content or not author:
+            abort(422)
+
         article = Article(title=title, content=content, author=author)
 
         try:
@@ -151,6 +154,12 @@ def create_app(test_config=None):
         title = body.get("title")
         content = body.get("content")
         author = body.get("author")
+
+        if not title or not content or not author:
+            abort(
+                422,
+                description="The body must have the three attributes title, content, and author",
+            )
 
         article = Article.query.filter(Article.id == article_id).one_or_none()
         if article is None:
@@ -262,6 +271,12 @@ def create_app(test_config=None):
         description = body.get("description")
         article_ids = body.get("article_ids")
 
+        if not title or not description:
+            abort(
+                422,
+                description="The body must have at least the attributes title, description",
+            )
+
         collection = Collection(title=title, description=description)
 
         # Fetching the articles of the collection
@@ -298,6 +313,9 @@ def create_app(test_config=None):
         title = body.get("title")
         description = body.get("description")
         article_ids = body.get("article_ids")
+
+        if not title or not description:
+            abort(422)
 
         collection = Collection.query.filter(
             Collection.id == collection_id
