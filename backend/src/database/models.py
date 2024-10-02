@@ -38,6 +38,21 @@ def setup_db(app, db_path=database_path):
         db.create_all()
 
 
+def db_drop_and_create_all():
+    db.drop_all()
+    db.create_all()
+    # add one demo row which is helping in POSTMAN test
+    article = Article(title="water", content="about water", author="me")
+    article.insert()
+
+    collection = Collection(
+        title="my water collection", description="about water and water"
+    )
+    collection.articles.extend([article])
+    article.insert()
+    collection.insert()
+
+
 articles_collections = db.Table(
     "articles_collections",
     db.Column("article_id", db.Integer, db.ForeignKey("articles.id"), primary_key=True),
