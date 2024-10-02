@@ -63,7 +63,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test GET /articles
     def test_get_articles(self):
-        res = self.client().get("/articles", headers=self.valid_auth_header)
+        res = self.client().get("/api/articles", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -72,7 +72,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test GET /articles/<int:article_id>
     def test_get_article(self):
-        res = self.client().get("/articles/1", headers=self.valid_auth_header)
+        res = self.client().get("/api/articles/1", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -87,7 +87,7 @@ class MyBlogTestCase(unittest.TestCase):
             "author": "Updated Author",
         }
         res = self.client().patch(
-            "/articles/1", json=updated_article, headers=self.valid_auth_header
+            "/api/articles/1", json=updated_article, headers=self.valid_auth_header
         )
         data = json.loads(res.data)
 
@@ -103,7 +103,7 @@ class MyBlogTestCase(unittest.TestCase):
             "article_ids": [1],
         }
         res = self.client().post(
-            "/collections", json=new_collection, headers=self.valid_auth_header
+            "/api/collections", json=new_collection, headers=self.valid_auth_header
         )
         data = json.loads(res.data)
 
@@ -113,7 +113,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test GET /collections
     def test_get_collections(self):
-        res = self.client().get("/collections", headers=self.valid_auth_header)
+        res = self.client().get("/api/collections", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -122,7 +122,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test GET /collections/<int:collection_id>
     def test_get_collection(self):
-        res = self.client().get("/collections/1", headers=self.valid_auth_header)
+        res = self.client().get("/api/collections/1", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -137,7 +137,7 @@ class MyBlogTestCase(unittest.TestCase):
             "article_ids": [1],
         }
         res = self.client().patch(
-            "/collections/1", json=updated_collection, headers=self.valid_auth_header
+            "/api/collections/1", json=updated_collection, headers=self.valid_auth_header
         )
         data = json.loads(res.data)
 
@@ -147,7 +147,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test DELETE /collections/<int:collection_id>
     def test_delete_collection(self):
-        res = self.client().delete("/collections/1", headers=self.valid_auth_header)
+        res = self.client().delete("/api/collections/1", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -156,7 +156,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test DELETE /articles/<int:article_id>
     def test_delete_article(self):
-        res = self.client().delete("/articles/1", headers=self.valid_auth_header)
+        res = self.client().delete("/api/articles/1", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -165,7 +165,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test GET /articles/<int:article_id> (Fail Case - Article Not Found)
     def test_get_article_not_found(self):
-        res = self.client().get("/articles/1000", headers=self.valid_auth_header)
+        res = self.client().get("/api/articles/1000", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -178,7 +178,7 @@ class MyBlogTestCase(unittest.TestCase):
             "author": "Author Name",
         }
         res = self.client().post(
-            "/articles", json=new_article, headers=self.no_auth_header
+            "/api/articles", json=new_article, headers=self.no_auth_header
         )
         data = json.loads(res.data)
 
@@ -186,7 +186,7 @@ class MyBlogTestCase(unittest.TestCase):
 
     # Test DELETE /articles/<int:article_id> (Fail Case - Article Not Found)
     def test_delete_article_not_found(self):
-        res = self.client().delete("/articles/1000", headers=self.valid_auth_header)
+        res = self.client().delete("/api/articles/1000", headers=self.valid_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -194,7 +194,7 @@ class MyBlogTestCase(unittest.TestCase):
     # Test DELETE /articles/<int:article_id> (Fail Case - Unauthorized no permission)
     def test_delete_article_invalid_token(self):
         res = self.client().delete(
-            "/articles/1", headers=self.valid_no_credentials_auth_header
+            "/api/articles/1", headers=self.valid_no_credentials_auth_header
         )
         data = json.loads(res.data)
 
@@ -208,7 +208,7 @@ class MyBlogTestCase(unittest.TestCase):
             "author": "Updated Author",
         }
         res = self.client().patch(
-            "/articles/1", json=updated_article, headers=self.no_auth_header
+            "/api/articles/1", json=updated_article, headers=self.no_auth_header
         )
         data = json.loads(res.data)
 
