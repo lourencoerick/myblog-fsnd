@@ -20,7 +20,7 @@ const articles = ref([]);
 const getArticles = async () => {
     try {
         const response = await axios.get('/api/articles');
-        articles.value = response.data;
+        articles.value = response.data.articles;
     } catch (error) {
         console.error('Error fetching articles:', error);
     }
@@ -33,7 +33,7 @@ const addCollection = async () => {
     const newCollection = {
         title: form.title,
         description: form.description,
-        articles: form.selectedArticles
+        article_ids: form.selectedArticles
     };
 
     try {
