@@ -21,10 +21,9 @@ const handleSubmit = async () => {
         author: form.author
     }
 
-    const token = await getAccessTokenSilently();
-
     try {
-        const response = await axios.post('/api/articles/', newArticle, {
+        const token = await getAccessTokenSilently();
+        const response = await axios.post('/api/articles', newArticle, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
