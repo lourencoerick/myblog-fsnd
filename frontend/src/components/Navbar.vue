@@ -101,12 +101,6 @@ const { isAuthenticated } = useAuth0();
             <LogoutButton />
           </li>
 
-          <li>
-            <RouterLink to="/profile" >
-              Profile
-            </RouterLink>
-          </li>
-
         </ul>
       </nav>
     </div>

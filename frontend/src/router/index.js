@@ -9,7 +9,6 @@ import AddCollectionView from '@/views/AddCollectionView.vue'
 import EditCollectionView from '@/views/EditCollectionView.vue'
 import CollectionView from '@/views/CollectionView.vue'
 import CollectionsView from '@/views/CollectionsView.vue'
-import Profile from '@/views/Profile.vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 
 const router = createRouter({
@@ -63,11 +62,6 @@ const router = createRouter({
       name: 'edit-collection',
       component: EditCollectionView,
       meta: { requiresAuth: true }
-    },   
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
     },        
     {
       path: '/:catchAll(.*)',
