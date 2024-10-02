@@ -47,7 +47,6 @@ def create_app(test_config=None):
         )
 
     @app.route("/articles/<int:article_id>", methods=["GET"])
-    # @requires_auth(permission="")
     def get_article(article_id):
 
         article = Article.query.filter(Article.id == article_id).one_or_none()
