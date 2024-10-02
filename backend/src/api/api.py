@@ -31,7 +31,7 @@ def create_app(test_config=None):
         with app.app_context():
             db_drop_and_create_all()
 
-    @app.route("/articles", methods=["GET"])
+    @app.route("/api/articles", methods=["GET"])
     def get_articles():
         page = request.args.get("page", 1)
         articles = Article.query.paginate(page=page, per_page=ARTICLES_PER_PAGE).items
@@ -46,7 +46,7 @@ def create_app(test_config=None):
             200,
         )
 
-    @app.route("/articles/<int:article_id>", methods=["GET"])
+    @app.route("/api/articles/<int:article_id>", methods=["GET"])
     def get_article(article_id):
 
         article = Article.query.filter(Article.id == article_id).one_or_none()
@@ -58,7 +58,7 @@ def create_app(test_config=None):
             200,
         )
 
-    @app.route("/articles", methods=["POST"])
+    @app.route("/api/articles", methods=["POST"])
     @requires_auth(permission="post:articles")
     def create_article():
 
@@ -82,7 +82,7 @@ def create_app(test_config=None):
 
         return jsonify({"sucess": True, "id": article_id}), 200
 
-    @app.route("/articles/<int:article_id>", methods=["PATCH"])
+    @app.route("/api/articles/<int:article_id>", methods=["PATCH"])
     @requires_auth(permission="patch:articles")
     def edit_article(article_id):
 
@@ -111,7 +111,7 @@ def create_app(test_config=None):
 
         return jsonify({"sucess": True, "id": article_id}), 200
 
-    @app.route("/articles/<int:article_id>", methods=["DELETE"])
+    @app.route("/api/articles/<int:article_id>", methods=["DELETE"])
     @requires_auth(permission="delete:articles")
     def delete_article(article_id):
         article = Article.query.filter(Article.id == article_id).one_or_none()
@@ -126,7 +126,7 @@ def create_app(test_config=None):
 
         return jsonify({"success": True, "delete": article_id}), 200
 
-    @app.route("/collections", methods=["GET"])
+    @app.route("/api/collections", methods=["GET"])
     def get_collections():
         page = request.args.get("page", 1)
         collections = Collection.query.paginate(
@@ -145,7 +145,7 @@ def create_app(test_config=None):
             200,
         )
 
-    @app.route("/collections/<int:collection_id>", methods=["GET"])
+    @app.route("/api/collections/<int:collection_id>", methods=["GET"])
     # @requires_auth(permission="")
     def get_collection(collection_id):
 
@@ -160,7 +160,7 @@ def create_app(test_config=None):
             200,
         )
 
-    @app.route("/collections", methods=["POST"])
+    @app.route("/api/collections", methods=["POST"])
     @requires_auth(permission="post:collections")
     def create_collection():
 
@@ -174,21 +174,21 @@ def create_app(test_config=None):
         collection = Collection(title=title, description=description)
 
         # fetching the articles of the collection
-        articles = Article.query.filter(Article.id.in_(article_ids)).all()
-
-        try:
+        if article_ids is not None:
+            articles = Article.query.filter(Article.id.in_(article_ids)).all()
             collection.articles.extend(articles)
+        try:
             collection.insert()
         except SQLAlchemyError as e:
             db.session.rollback()
             logger.error(f"Error trying to insert a new collection, {e}")
         finally:
-            collection_repr = repr(collection)
+            collection_id = collection.id
             db.session.close()
 
-        return jsonify({"sucess": True, "article": collection_repr}), 200
+        return jsonify({"sucess": True, "id": collection_id}), 200
 
-    @app.route("/collections/<int:collection_id>", methods=["PATCH"])
+    @app.route("/api/collections/<int:collection_id>", methods=["PATCH"])
     @requires_auth(permission="patch:collections")
     def edit_collection(collection_id):
 
@@ -223,7 +223,7 @@ def create_app(test_config=None):
 
         return jsonify({"sucess": True, "id": collection_id}), 200
 
-    @app.route("/collections/<int:collection_id>", methods=["DELETE"])
+    @app.route("/api/collections/<int:collection_id>", methods=["DELETE"])
     @requires_auth(permission="delete:collections")
     def delete_collection(collection_id):
         collection = Collection.query.filter(
