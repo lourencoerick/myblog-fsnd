@@ -48,8 +48,8 @@ def db_drop_and_create_all():
     collection = Collection(
         title="my water collection", description="about water and water"
     )
-    collection.articles.extend([article])
     article.insert()
+    collection.articles.extend([article])
     collection.insert()
 
 
