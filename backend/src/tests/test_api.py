@@ -9,6 +9,7 @@ from src.api.api import create_app
 # in the database connection
 load_dotenv()
 VALID_AUTH0_TOKEN = os.getenv("VALID_AUTH0_TOKEN")
+VALID_NO_ROLE_AUTH0_TOKEN = os.getenv("VALID_NO_ROLE_AUTH0_TOKEN")
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 DATABSE_NAME = "test_db"
@@ -34,6 +35,10 @@ class MyBlogTestCase(unittest.TestCase):
         # Tokens with different permissions and missing/invalid tokens
         self.valid_auth_header = {"Authorization": f"Bearer {VALID_AUTH0_TOKEN}"}
         self.invalid_auth_header = {"Authorization": f"Bearer {VALID_AUTH0_TOKEN}l"}
+        self.valid_no_credentials_auth_header = {
+            "Authorization": f"Bearer {VALID_NO_ROLE_AUTH0_TOKEN}"
+        }
+
         self.no_auth_header = {}
 
     def tearDown(self):
@@ -186,12 +191,14 @@ class MyBlogTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
 
-    # Test DELETE /articles/<int:article_id> (Fail Case - Invalid Token)
+    # Test DELETE /articles/<int:article_id> (Fail Case - Unauthorized no permission)
     def test_delete_article_invalid_token(self):
-        res = self.client().delete("/articles/1", headers=self.invalid_auth_header)
+        res = self.client().delete(
+            "/articles/1", headers=self.valid_no_credentials_auth_header
+        )
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.status_code, 403)
 
     # Test PATCH /articles/<int:article_id> (Fail Case - Missing Authorization)
     def test_update_article_no_auth(self):
