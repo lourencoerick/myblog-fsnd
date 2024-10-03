@@ -14,15 +14,14 @@ app
   .use(Toast)
   .use(
     createAuth0({
-      domain: 'dev-u87omsusx1w1jtso.us.auth0.com',
-      clientId: 'E8xpUla9GyHNYXoK6xgRcJ9edApb32dl',
+      domain: import.meta.env.VITE_AUTH0_DOMAIN,
+      clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
       authorizationParams: {
         redirect_uri: window.location.origin,
-        audience: 'my-blog',
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
         response_type: 'token'
       }
     })
   )
 
-// https://dev-u87omsusx1w1jtso.us.auth0.com/authorize?audience=my-blog&response_type=token&client_id=E8xpUla9GyHNYXoK6xgRcJ9edApb32dl&redirect_uri=http://localhost:3000
 app.mount('#app')
