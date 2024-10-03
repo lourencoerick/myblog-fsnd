@@ -2,6 +2,7 @@
 
 ## Description
 This project is a blog application that uses Flask for the backend and Vue.js for the frontend. It allows users to explore articles and collections.
+![alt text](myblog_system.png)
 
 ## Prerequisites
 Before you begin, ensure you have the following installed on your machine:
