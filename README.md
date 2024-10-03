@@ -59,6 +59,38 @@ Before you begin, ensure you have the following installed on your machine:
    docker-compose up
    ```
 
+8. **Authentication**
+    - For the authentication system, it was used a third-party authentication, [auth0](https://auth0.com/docs/).
+
+    The roles and the existing permissions are described below: 
+
+    - **Public**
+        - `get:articles`
+        - `get:collections`
+    
+    - **Creator**
+        - `get:articles`
+        - `get:collections`
+        - `post:articles`
+        - `patch:articles`
+    
+    - **Managers**
+        - `get:articles`
+        - `post:articles`
+        - `patch:articles`
+        - `delete:articles`
+        - `get:collections`
+        - `post:collections`
+        - `patch:collections`
+        - `delete:collections`
+
+9. Production
+    - The productions are the following: 
+        - backend: https://myblog-fsnd.onrender.com/, for more information about the endpoints, see the documentation inside the backend directory. 
+
+        - frontend: https://myblog-fsnd-frontend.onrender.com/
+
+
 ## Contributing
 Feel free to contribute! Fork the repository, make your changes, and submit a pull request.
 
