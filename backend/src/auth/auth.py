@@ -1,14 +1,20 @@
+import os
 import json
 from urllib.request import urlopen
 from functools import wraps
 from flask import request, abort
 
+from dotenv import load_dotenv
+
 from jose import jwt
 
 
-AUTH0_DOMAIN = "dev-u87omsusx1w1jtso.us.auth0.com"
-ALGORITHMS = ["RS256"]
-API_AUDIENCE = "my-blog"
+# Loading env vars which will be used
+# in authentication
+load_dotenv()
+AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+ALGORITHMS = [os.getenv("ALGORITHMS")]
+API_AUDIENCE = os.getenv("API_AUDIENCE")
 
 """
 AuthError Exception
