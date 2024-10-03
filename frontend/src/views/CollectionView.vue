@@ -26,7 +26,7 @@ const deleteCollection = async () => {
         const token = await getAccessTokenSilently();
 
         if (confirm) {
-            await axios.delete(`/api/collections/${collectionId}`,          {
+            await axios.delete(`${import.meta.env.VITE_API_ENDPOINT}/api/collections/${collectionId}`,          {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -43,7 +43,7 @@ const deleteCollection = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/api/collections/${collectionId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/collections/${collectionId}`);
         state.collection = response.data.collection;
     } catch (error) {
         console.error('Error fetching collection', error);

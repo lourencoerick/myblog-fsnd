@@ -23,7 +23,7 @@ const articles = ref([]);
 
 const getArticles = async () => {
     try {
-        const response = await axios.get('/api/articles');
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/articles`);
         articles.value = response.data.articles;
     } catch (error) {
         console.error('Error fetching articles:', error);
@@ -38,7 +38,7 @@ const state = reactive({
 
 const populateForm = async () => {
     try {
-        const response = await axios.get(`/api/collections/${collectionId}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/collections/${collectionId}`)
         state.collection = response.data.collection;
         // populate inputs
         form.title = state.collection.title;
@@ -68,7 +68,7 @@ const addCollection = async () => {
         article_ids: form.selectedArticles
     };
     try {
-        const response = await axios.patch('/api/collections/', newCollection,
+        const response = await axios.patch(`${import.meta.env.VITE_API_ENDPOINT}/api/collections/`, newCollection,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`

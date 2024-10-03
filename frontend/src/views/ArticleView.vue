@@ -25,7 +25,7 @@ const deleteArticle = async () => {
         const token = await getAccessTokenSilently();
 
         if (confirm) {
-            await axios.delete(`/api/articles/${articleId}`,          {
+            await axios.delete(`${import.meta.env.VITE_API_ENDPOINT}/api/articles/${articleId}`,          {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -42,7 +42,7 @@ const deleteArticle = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/api/articles/${articleId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/articles/${articleId}`);
         state.article = response.data.article;
     } catch (error) {
         console.error('Error fetching article', error);

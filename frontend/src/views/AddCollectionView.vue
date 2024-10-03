@@ -19,7 +19,7 @@ const articles = ref([]);
 
 const getArticles = async () => {
     try {
-        const response = await axios.get('/api/articles');
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/articles`);
         articles.value = response.data.articles;
     } catch (error) {
         console.error('Error fetching articles:', error);
@@ -38,7 +38,7 @@ const addCollection = async () => {
 
     try {
         const token = await getAccessTokenSilently();
-        const response = await axios.post('/api/collections', newCollection, {
+        const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/collections`, newCollection, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

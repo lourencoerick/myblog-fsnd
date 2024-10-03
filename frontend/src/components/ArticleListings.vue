@@ -35,7 +35,9 @@ const props = defineProps({
 onMounted(async () => {
     if (props.collectionID === undefined) {
         try {
-            const response = await axios.get('/api/articles');
+            const response = await axios.get(
+                `${import.meta.env.VITE_API_ENDPOINT}/api/articles`
+            );
             state.articles = response.data.articles;
         } catch (error) {
             console.error('Error fetching articles', error);
@@ -44,10 +46,10 @@ onMounted(async () => {
         }
     } else {
         try {
-            const response = await axios.get(`/api/collections/${props.collectionID}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/collections/${props.collectionID}`);
             const articleIDs = response.data.collection.article_ids;
             state.articles = await Promise.all(articleIDs.map(async (articleID) => {
-                const response = await axios.get(`/api/articles/${articleID}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/articles/${articleID}`);
                 return response.data.article
             }
             ));

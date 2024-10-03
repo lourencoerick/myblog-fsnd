@@ -29,7 +29,7 @@ const handleSubmit = async () => {
 
 
     try {
-        const response = await axios.patch(`/api/articles/${articleId}`, updatedArticle,
+        const response = await axios.patch(`${import.meta.env.VITE_API_ENDPOINT}/api/articles/${articleId}`, updatedArticle,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -51,7 +51,7 @@ const state = reactive({
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/api/articles/${articleId}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/articles/${articleId}`)
         state.article = response.data.article;
         // populate inputs
         form.title = state.article.title;

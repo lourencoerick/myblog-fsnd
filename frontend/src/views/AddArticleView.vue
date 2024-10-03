@@ -23,7 +23,7 @@ const handleSubmit = async () => {
 
     try {
         const token = await getAccessTokenSilently();
-        const response = await axios.post('/api/articles', newArticle, {
+        const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/articles`, newArticle, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
