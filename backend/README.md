@@ -1,17 +1,17 @@
 # API Documentation
 
 ## Base URL
-All endpoints are located at `/`.
+All endpoints are located at `/api/`.
 
 ## Authentication
 Some routes require authentication, which is handled using Auth0. The permission required for each route is specified in the endpoint documentation.
 
 ## Articles Endpoints
 
-### `GET /articles`
+### `GET /api/articles`
 Fetch all articles.
 
-- **URL**: `/articles`
+- **URL**: `/api/articles`
 - **Method**: `GET`
 - **URL Params**: Optional, `page` (default is 1)
 - **Success Response**:
@@ -32,10 +32,10 @@ Fetch all articles.
         }
         ```
 
-### `GET /articles/<int:article_id>`
+### `GET /api/articles/<int:article_id>`
 Fetch a single article by its ID.
 
-- **URL**: `/articles/<article_id>`
+- **URL**: `/api/articles/<article_id>`
 - **Method**: `GET`
 - **URL Params**: `article_id`
 - **Success Response**:
@@ -56,10 +56,10 @@ Fetch a single article by its ID.
     - **Code**: 404
     - **Message**: `ID <article_id> not found`
 
-### `POST /articles`
+### `POST /api/articles`
 Create a new article (requires `post:articles` permission).
 
-- **URL**: `/articles`
+- **URL**: `/api/articles`
 - **Method**: `POST`
 - **Body**:
     ```json
@@ -79,10 +79,10 @@ Create a new article (requires `post:articles` permission).
         }
         ```
 
-### `PATCH /articles/<int:article_id>`
+### `PATCH /api/articles/<int:article_id>`
 Update an existing article by its ID (requires `patch:articles` permission).
 
-- **URL**: `/articles/<article_id>`
+- **URL**: `/api/articles/<article_id>`
 - **Method**: `PATCH`
 - **URL Params**: `article_id`
 - **Body**:
@@ -106,10 +106,10 @@ Update an existing article by its ID (requires `patch:articles` permission).
     - **Code**: 404
     - **Message**: `ID <article_id> not found`
 
-### `DELETE /articles/<int:article_id>`
+### `DELETE /api/articles/<int:article_id>`
 Delete an article by its ID (requires `delete:articles` permission).
 
-- **URL**: `/articles/<article_id>`
+- **URL**: `/api/articles/<article_id>`
 - **Method**: `DELETE`
 - **URL Params**: `article_id`
 - **Success Response**:
@@ -129,10 +129,10 @@ Delete an article by its ID (requires `delete:articles` permission).
 
 ## Collections Endpoints
 
-### `GET /collections`
+### `GET /api/collections`
 Fetch all collections.
 
-- **URL**: `/collections`
+- **URL**: /api/collections`
 - **Method**: `GET`
 - **URL Params**: Optional, `page` (default is 1)
 - **Success Response**:
@@ -156,10 +156,10 @@ Fetch all collections.
         }
         ```
 
-### `GET /collections/<int:collection_id>`
+### `GET /api/collections/<int:collection_id>`
 Fetch a single collection by its ID.
 
-- **URL**: `/collections/<collection_id>`
+- **URL**: `/api/collections/<collection_id>`
 - **Method**: `GET`
 - **URL Params**: `collection_id`
 - **Success Response**:
@@ -183,10 +183,10 @@ Fetch a single collection by its ID.
     - **Code**: 404
     - **Message**: `ID <collection_id> not found`
 
-### `POST /collections`
+### `POST /api/collections`
 Create a new collection (requires `post:collections` permission).
 
-- **URL**: `/collections`
+- **URL**: `/api/collections`
 - **Method**: `POST`
 - **Body**:
     ```json
@@ -206,10 +206,10 @@ Create a new collection (requires `post:collections` permission).
         }
         ```
 
-### `PATCH /collections/<int:collection_id>`
+### `PATCH /api/collections/<int:collection_id>`
 Update an existing collection by its ID (requires `patch:collections` permission).
 
-- **URL**: `/collections/<collection_id>`
+- **URL**: `/api/collections/<collection_id>`
 - **Method**: `PATCH`
 - **URL Params**: `collection_id`
 - **Body**:
@@ -233,10 +233,10 @@ Update an existing collection by its ID (requires `patch:collections` permission
     - **Code**: 404
     - **Message**: `ID <collection_id> not found`
 
-### `DELETE /collections/<int:collection_id>`
+### `DELETE /api/collections/<int:collection_id>`
 Delete a collection by its ID (requires `delete:collections` permission).
 
-- **URL**: `/collections/<collection_id>`
+- **URL**: `/api/collections/<collection_id>`
 - **Method**: `DELETE`
 - **URL Params**: `collection_id`
 - **Success Response**:
